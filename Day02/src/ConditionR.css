@@ -1,0 +1,19 @@
+.btn1{
+    all: unset;
+    padding: 10px;
+    cursor: pointer;
+    background-color: lightblue;
+    border-radius: 8px;
+}
+.btn2{
+    all: unset;
+    cursor: pointer;
+    padding: 10px;
+    background-color: greenyellow;
+    border-radius: 8px;
+}
+.box > div{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
