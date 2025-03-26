@@ -2,8 +2,7 @@ import { useState } from "react";
 import { posts } from "./data";
 import './style.css'
 
-const Post = ({auth, item, idx, deletePost})=>{
-    const [count, setCount] = useState(item.like_count)
+const Post = ({auth, item, idx, deletePost, setCount})=>{
     return (
         <div key={idx} className="comment">
              <img className="avatar" src={item.avatar} />
@@ -12,8 +11,8 @@ const Post = ({auth, item, idx, deletePost})=>{
              <p className="comment-text">{item.comment}</p>
              <div className="comment-details">
              <p className="comment-time">{item.time}</p>
-             <p className="like-count">좋아요 수 : {count}</p>
-             <button onClick={()=>setCount(count+1)} className="like-button">❤️</button>
+             <p className="like-count">좋아요 수 : {item.like_count}</p>
+             <button onClick={()=>setCount(item.name)} className="like-button">❤️</button>
              </div>
              </div>
              {auth.name === item.name && <button onClick={()=>deletePost(item.name)} className="delete-button ">삭제</button>}
@@ -29,10 +28,20 @@ export default function PostList(){
     const deletePost = (name) =>{
         setData(data.filter(item=>name !== item.name));
     }
+    const countLike = (name)=>{
+        setData(data.map(item=>{
+            if(item.name === name ) {
+                let count = item.like_count+1
+                return {...item, like_count : count}
+            }
+            return {...item}
+        }))
+    }
+    
     return(
         <div className="comment-list">
            {data.map((item, idx) =>(
-             <Post auth={auth} item = {item} idx={idx} deletePost={deletePost} />
+             <Post auth={auth} item = {item} idx={idx} deletePost={deletePost} setCount={countLike} />
            ))}
         </div>
     )

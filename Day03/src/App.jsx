@@ -15,10 +15,10 @@ function App() {
       {/* <MapTest2 /> */}
       {/* <PackingList /> */}
       {/* <MapTest3 /> */}
-      {/* <PostList /> */}
+      <PostList />
       {/* <MessageList /> */}
       {/* <CommentList /> */}
-      <ConditionTest />
+      {/* <ConditionTest /> */}
     </div>
   )
 }
