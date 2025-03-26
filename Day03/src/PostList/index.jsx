@@ -29,13 +29,19 @@ export default function PostList(){
         setData(data.filter(item=>name !== item.name));
     }
     const countLike = (name)=>{
-        setData(data.map(item=>{
-            if(item.name === name ) {
-                let count = item.like_count+1
-                return {...item, like_count : count}
+        setData(prevData => {
+            const updatedData = [...prevData];
+            const itemIndex = updatedData.findIndex(item => item.name === name);
+            
+            if (itemIndex !== -1) {
+                updatedData[itemIndex] = {
+                    ...updatedData[itemIndex],
+                    like_count: updatedData[itemIndex].like_count + 1
+                };
             }
-            return {...item}
-        }))
+    
+            return updatedData;
+        });
     }
     
     return(
