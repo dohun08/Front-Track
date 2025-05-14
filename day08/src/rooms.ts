@@ -11,7 +11,7 @@ export interface Room {
   
   export const Rooms: Room[] = [
     {
-      key: 1,
+      key: 0,
       name: "OLIVE Serviced 아파트",
       location: "Salt Lake",
       totalGuest: "4",
@@ -22,7 +22,7 @@ export interface Room {
         "https://a0.muscache.com/im/pictures/a034f6f6-61e7-4cf6-9d90-777587ea0b26.jpg?aki_policy=large",
     },
     {
-      key: 2,
+      key: 1,
       name: "Oyo Rooms,완벽한 룸 스테이",
       location: "Kolkata",
       totalGuest: "7",
@@ -33,7 +33,7 @@ export interface Room {
         "https://a0.muscache.com/im/pictures/1d9601a7-84d7-4bf5-9fda-6d158e65eed9.jpg?aki_policy=large",
     },
     {
-      key: 3,
+      key: 2,
       name: "Secured Home Manzile",
       location: "Howrah",
       totalGuest: "34",
