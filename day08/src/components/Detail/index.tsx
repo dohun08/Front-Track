@@ -1,20 +1,21 @@
 //<DetailTab.jsx>  
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Nav } from 'react-bootstrap';
 import { useParams }from "react-router-dom";
 import {Rooms, Room} from "../../rooms";
+import { Context1, MyContextType } from "../../App";
 
 export default function DetailTab() {
  let { id } = useParams(); //useParams()를 이용하여 파라미터로 id 받기
  const room: Room | undefined = Rooms?.find(room => room.key === Number(id));
  console.log(room)
  const [tab, setTab] = useState("link0");
- const [theme, setTheme] = useState(false);
+ const {theme, toggleTheme} = useContext(Context1) as MyContextType;
 
  //3. 탭변경 state변수 tab저장하기
  return (
    <main style={{backgroundColor: theme ? "black" : "white"}}>
-    <button onClick={()=>setTheme(!theme)}>change</button>
+    <button onClick={toggleTheme}>change</button>
     {room && 
     <div className="container">
        <div className="box image">
