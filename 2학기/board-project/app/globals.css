@@ -5,7 +5,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: black;
+    --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
@@ -60,7 +60,7 @@ input, textarea {
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
-
+  
 }
 
 button, .button {
@@ -72,7 +72,7 @@ button, .button {
   font-size: 1rem;
   margin-right: 0.5rem;
 }
-
+  
 nav {
   width: 100%;
   max-width: 600px;
@@ -112,12 +112,3 @@ li div{
   margin-right: 1.5rem;
 }
 
-.vvv{
-  width: 800px;
-  height: 800px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-}
