@@ -27,16 +27,17 @@ export default function ListPage() {
       }
     }).then(() => fetchPosts())
   };
+  if(!posts) return;
 
   return (
     <main>
       <h1>게시물 목록</h1>
       <ul>
-        {posts.map(post => (
-          <li key={post.id}>
-            <Link href={`/post/${post.id}`}>{post.title}</Link>
+        {posts?.map(post => (
+          <li key={post._id}>
+            <Link href={`/post/${post._id}`}>{post.title}</Link>
             <div>{post.content}</div>
-            <button className="button" onClick={() => handleDelete(post.id)}>삭제</button>
+            <button className="button" onClick={() => handleDelete(post._id)}>삭제</button>
             <span className = "button"><Link href={`/post/${post.id}/edit`}>수정</Link></span>
           </li>
         ))}
