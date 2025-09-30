@@ -3,8 +3,19 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function WritePage() {
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return <div>로딩 중...</div>;
+  }
+
+  if (!session) {
+    return <div>로그인이 필요합니다.</div>;
+  }   
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const router = useRouter();

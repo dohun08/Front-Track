@@ -18,14 +18,20 @@ export default function ListPage() {
     fetchPosts();
   }, []);
 
-  const handleDelete =  async (id) => {
-    //delete api실행
-    await fetch(`/api/post/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    }).then(() => fetchPosts())
+  const handleDelete = async (postId) => {
+    const res = await fetch(`/api/post/${postId}`, {
+      method: "DELETE",
+    });
+    if (res.status === 403) {
+      alert("작성자만 삭제할 수 있습니다.");
+      return;
+    }
+    if (res.ok) {
+      // 삭제 성공 시 목록 갱신 등 처리
+      fetchPosts();
+    } else {
+      alert("삭제에 실패했습니다.");
+    }
   };
   if(!posts) return;
 

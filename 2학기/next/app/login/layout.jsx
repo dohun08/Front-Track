@@ -18,7 +18,7 @@ export default async function RootLayout({ children }) {
       <div className="navbar">
         <Link href="/" className="logo">BSSM board</Link> 
         <Link href="/list">글목록</Link> 
-        <LoginBtn></LoginBtn>
+        <LoginBtn />
     </div>
        {children}
        </Providers>

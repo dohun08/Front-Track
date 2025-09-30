@@ -3,11 +3,16 @@ import { updatePost, deletePost } from '@/data/post';
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { connectDB } from "@/util/database.js";
+import { ObjectId } from 'mongodb';
 
 export async function GET(request, { params }) {
   const client = await connectDB;
+  console.log("params.id", params.id);
+  
   const db = client.db("board");
-  const post = await db.collection("post").findOne({ _id: params.id });
+  const post = await db.collection("post").findOne({ _id: new ObjectId(params.id) });
+  console.log("가져온 글 정보:", post);
+  
   if (!post) {
     return new Response(JSON.stringify({ error: "Not found" }), { status: 404 });
   }
@@ -39,7 +44,6 @@ export async function DELETE(request, { params }) {
 
   const client = await connectDB;
   const db = client.db("board");
-  // ObjectId 변환 필요
   const { ObjectId } = require("mongodb");
   const post = await db.collection("post").findOne({ _id: new ObjectId(params.id) });
   console.log("삭제 대상 글 정보:", post);
@@ -48,9 +52,12 @@ export async function DELETE(request, { params }) {
     return new Response(JSON.stringify({ error: "Not found" }), { status: 404 });
   }
 
-  // 작성자만 삭제 가능
-  if (post.author !== session.user.email) {
-    console.log("작성자 불일치: 삭제 불가");
+  // 사용자 정보 조회 (role 확인)
+  const user = await db.collection("user_cred").findOne({ email: session.user.email });
+
+  // 작성자이거나 어드민이면 삭제 가능
+  if (post.author !== session.user.email && user?.role !== "ADMIN") {
+    console.log("작성자/관리자 아님: 삭제 불가");
     return new Response(JSON.stringify({ error: "Forbidden" }), { status: 403 });
   }
 
